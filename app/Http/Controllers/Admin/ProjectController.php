@@ -6,12 +6,13 @@ use App\Models\Project;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 
+
 class ProjectController extends Controller
 {
   public function index(){
     $projects = Project::all();
 
-    return view ("admin.projects.index", compact("projects"));
+    return view("admin.projects.index");
   }
   
   public function show($id){
@@ -33,6 +34,8 @@ class ProjectController extends Controller
       "thumb" => "required|string",
       "release" => "required|date",
     ]);
+
+
 
     /* new Project();
     $project->fill($data)

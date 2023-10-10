@@ -26,6 +26,7 @@ Route::get('/dashboard', function () {
 
 
 // Routes group for ADMIN
+// admin.projects.index, admin.projects.show, admin.projects.create
 Route::middleware(["auth", "verified"])
   ->prefix("admin")
   ->name("admin.")
@@ -34,6 +35,7 @@ Route::middleware(["auth", "verified"])
 });
 
 // Routes for GUESTS
+// projects.index
 Route::get("/projects", [GuestProjectController::class, "index"])->name("projects.index");
 
 Route::middleware('auth')->group(function () {

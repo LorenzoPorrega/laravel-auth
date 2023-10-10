@@ -18,7 +18,7 @@ return new class extends Migration
             $table->text("description");
             $table->string("thumb")->nullable();
             $table->date("release");
-            $table->json("language")->nullable();
+            $table->string("language")->nullable();
             $table->string("link");
             $table->string("slug")->unique();
 
