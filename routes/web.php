@@ -32,6 +32,7 @@ Route::middleware(["auth", "verified"])
   ->name("admin.")
   ->group(function () {
   Route::resource("projects", ProjectController::class);
+  /* Route::get("/projects/{project}", [ProjectController::class, "show"])->name("projects.show"); */
 });
 
 // Routes for GUESTS

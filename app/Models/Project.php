@@ -16,5 +16,6 @@ class Project extends Model
         "release",
         "language",
         "link",
+        "slug"
     ];
 }

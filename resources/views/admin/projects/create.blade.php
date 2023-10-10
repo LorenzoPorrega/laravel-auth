@@ -72,7 +72,7 @@
         </div>
       </div>
       <div class="mb-4 pt-2">
-        <button type="button" class="btn btn-primary btn-lg">Post the project!</button>
+        <button type="submit" class="btn btn-primary btn-lg">Post the project!</button>
       </div>
     </form>
 
