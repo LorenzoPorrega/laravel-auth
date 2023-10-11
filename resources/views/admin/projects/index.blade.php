@@ -14,7 +14,11 @@
                   <p class="card-text text-uppercase fw-bold fs-5 text-center">{{ $project->title}}</p>
                   <div class="d-flex ">
                     <a href="{{ route("admin.projects.edit", $project->slug) }}" class="text-decoration-none"><button type="button" class="btn btn-primary btn-sm">Edit</button></a>
-                    <a href="{{-- {{ route("admin.projects.delete") }} --}}" class="text-decoration-none"><button type="button" class="btn btn-danger btn-sm ms-2">Delete</button></a>
+                    <form action="{{ route("admin.projects.destroy", $project->slug)}}" method="POST">
+                      @csrf()
+                      @method("DELETE")
+                      <button type="submit" class="btn btn-danger btn-sm ms-2">Delete</button>
+                    </form>
                   </div>
                 </div>
               </div>

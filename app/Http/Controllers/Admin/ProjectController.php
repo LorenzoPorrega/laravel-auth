@@ -90,4 +90,10 @@ class ProjectController extends Controller
 
     return redirect()->route("admin.projects.show", $project->slug);
   }
+
+  public function destroy($slug){
+    $project = Project::where("slug", $slug)->firstOrFail();
+    $project->delete();
+    return redirect()->route("admin.projects.index");
+  }
 }
