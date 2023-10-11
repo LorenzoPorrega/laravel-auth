@@ -13,7 +13,7 @@
         </ul>
       </div>
     @endif
-    <form action="{{ route('admin.projects.update', $project->slug) }}" method="POST">
+    <form action="{{ route('admin.projects.update', $project->slug) }}" method="POST" enctype="multipart/form-data">
       @csrf()
       @method('patch')
       
@@ -46,7 +46,7 @@
       </div>
       <div class="mb-4">
         <label class="fw-bold" for="thumb">{{__('Thumb image')}}</label>
-        <input class="form-control" type="text" name="thumb" value="{{ $project->thumb }}">
+        <input class="form-control" type="file" name="thumb">
         {{-- @error('thumb')
         <span class="invalid-feedback" role="alert">
             <strong>{{ $errors->get('thumb')}}</strong>
@@ -70,7 +70,7 @@
             @enderror --}}
           </div>
           <div class="col-6">
-            <label class="fw-bold" for="name">{{__('Release date')}}</label>
+            <label class="fw-bold" for="release">{{__('Release date')}}</label>
             <input class="form-control" type="date" name="release" value="{{ $project->release }}">
             {{-- @error('date')
             <span class="invalid-feedback" role="alert">
@@ -81,7 +81,7 @@
         </div>
       </div>
       <div class="mb-4 pt-2">
-        <button type="submit" class="btn btn-primary btn-lg">Post the project!</button>
+        <button type="submit" class="btn btn-primary btn-lg">Post the project's edit!</button>
       </div>
     </form>
 

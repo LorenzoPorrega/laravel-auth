@@ -6,6 +6,7 @@ use App\Models\Project;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\ProjectUpsertRequest;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
 /* use Log; */
 
@@ -85,6 +86,12 @@ class ProjectController extends Controller
     if($data["title"] !== $project->title){
       $data["slug"] = $this->generateSlug($data, $data["title"]);
     }
+
+    // I save the file in filesystem
+    $image_path = Storage::put("projects", $data["thumb"]);
+    
+    $data["image"] = $image_path;
+    dd($data["image"]);
 
     $project->update($data);
 

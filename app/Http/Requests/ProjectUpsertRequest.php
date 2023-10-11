@@ -34,7 +34,7 @@ class ProjectUpsertRequest extends FormRequest
 			"language" => "required|string",
 			"link" => "required|string",
 			"description" => "required|string",
-			"thumb" => "required|string",
+			"thumb" => "required|file",
 			"release" => "required|date",
 		];
 	}

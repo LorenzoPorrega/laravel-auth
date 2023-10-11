@@ -13,7 +13,7 @@
         </ul>
       </div>
     @endif
-    <form action="{{ route('admin.projects.store') }}" method="POST">
+    <form action="{{ route('admin.projects.store') }}" method="POST" enctype="multipart/form-data">
       @csrf()
       
       <div class="mb-4">
@@ -45,7 +45,7 @@
       </div>
       <div class="mb-4">
         <label class="fw-bold" for="thumb">{{__('Thumb image')}}</label>
-        <input class="form-control" type="text" name="thumb">
+        <input class="form-control" type="file" name="thumb">
         {{-- @error('thumb')
         <span class="invalid-feedback" role="alert">
             <strong>{{ $errors->get('thumb')}}</strong>
