@@ -26,7 +26,7 @@ Route::get('/dashboard', function () {
 
 
 // Routes group for ADMIN
-// admin.projects.index, admin.projects.show, admin.projects.create
+// admin.projects.index, admin.projects.show, admin.projects.create, admin.projects.edit, admin.project.update & admin.projects.delete
 Route::middleware(["auth", "verified"])
   ->prefix("admin")
   ->name("admin.")

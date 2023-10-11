@@ -13,12 +13,13 @@
         </ul>
       </div>
     @endif
-    <form action="{{ route('admin.projects.store') }}" method="POST">
+    <form action="{{ route('admin.projects.update', $project->slug) }}" method="POST">
       @csrf()
+      @method('patch')
       
       <div class="mb-4">
         <label class="fw-bold" for="title">{{__('Title')}}</label>
-        <input class="form-control" type="text" name="title" autofocus>
+        <input class="form-control" type="text" name="title" value="{{ $project->title }}" autofocus>
         {{-- @error('title')
         <span class="invalid-feedback" role="alert">
             <strong>{{ $errors->get('title')}}</strong>
@@ -27,7 +28,7 @@
       </div>
       <div class="mb-4">
         <label class="fw-bold" for="link">{{__('Project link')}}</label>
-        <input class="form-control" type="text" name="link">
+        <input class="form-control" type="text" name="link" value="{{ $project->link }}">
         {{-- @error('link')
         <span class="invalid-feedback" role="alert">
             <strong>{{ $errors->get('link')}}</strong>
@@ -36,7 +37,7 @@
       </div>
       <div class="mb-4">
         <label class="fw-bold" for="description">{{__('Description')}}</label>
-        <textarea class="form-control" type="text" name="description"></textarea>
+        <textarea class="form-control" type="text" name="description">{{ $project->description }}"</textarea>
         {{-- @error('description')
         <span class="invalid-feedback" role="alert">
             <strong>{{ $errors->get('description')}}</strong>
@@ -45,7 +46,7 @@
       </div>
       <div class="mb-4">
         <label class="fw-bold" for="thumb">{{__('Thumb image')}}</label>
-        <input class="form-control" type="text" name="thumb">
+        <input class="form-control" type="text" name="thumb" value="{{ $project->thumb }}">
         {{-- @error('thumb')
         <span class="invalid-feedback" role="alert">
             <strong>{{ $errors->get('thumb')}}</strong>
@@ -70,7 +71,7 @@
           </div>
           <div class="col-6">
             <label class="fw-bold" for="name">{{__('Release date')}}</label>
-            <input class="form-control" type="date" name="release">
+            <input class="form-control" type="date" name="release" value="{{ $project->release }}">
             {{-- @error('date')
             <span class="invalid-feedback" role="alert">
                 <strong>{{ $errors->get('date')}}</strong>
