@@ -44,12 +44,13 @@
         @enderror --}}
       </div>
       <div class="mb-4">
+        <label for="input-group" class="fw-bold">Thumb Image</label>
         <div class="input-group">
           <label class="btn btn-outline-secondary" type="button" id="inputGroupFileAddon04">
             <input type="file" class="form-control d-none" name="thumb" accept="img/*">
-            Scegli un immagine locale
+            Choose an image on your machine
           </label>
-          <input type="text" class="form-control" name="thumb-link" placeholder="...oppure fornisci un link web ad un immagine">
+          <input type="text" class="form-control" name="thumb-link" placeholder="...or provide an external image link">
         </div>
         {{-- @error('thumb')
         <span class="invalid-feedback" role="alert">

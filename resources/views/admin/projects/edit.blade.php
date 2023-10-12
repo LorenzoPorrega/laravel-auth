@@ -48,12 +48,13 @@
         <label class="fw-bold" for="old-thumb">Current thumb image</label>
         <img src="{{ asset('storage/' . $project->thumb) }}" alt="" class="img-thumbnail d-block my-2" style="width:250px;" name="old-thumb">
 
+        <label for="input-group" class="fw-bold">Thumb Image</label>
         <div class="input-group">
           <label class="btn btn-outline-secondary" type="button" id="inputGroupFileAddon04">
             <input type="file" class="form-control d-none" name="thumb" accept="img/*">
-            Scegli un immagine locale
+            Choose an image on your machine
           </label>
-          <input type="text" class="form-control" name="thumb_link" placeholder="...oppure fornisci un link web ad un immagine">
+          <input type="text" class="form-control" name="thumb_link" placeholder="...or provide an external image link">
         </div>
         {{-- @error('thumb')
         <span class="invalid-feedback" role="alert">
