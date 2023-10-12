@@ -6,12 +6,12 @@ use App\Models\Project;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\ProjectUpsertRequest;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
 /* use Log; */
 
-class ProjectController extends Controller
-{
+class ProjectController extends Controller{
   protected function generateSlug($data, $title){
     // Counter to start from a number
     $counter = 0;
@@ -35,21 +35,23 @@ class ProjectController extends Controller
     return $slug;
   }
 
+
   public function index(){
     $projects = Project::all();
-
     return view("admin.projects.index", compact("projects"));
   }
   
+
   public function show($slug){
     $project = Project::where("slug", $slug)->first();
-    
     return view("admin.projects.show", compact("project"));
   }
+
 
   public function create(){
     return view("admin.projects.create");
   }
+
 
   // store will be an instance of ProjectUpsertRequest
   public function store(ProjectUpsertRequest $request){
@@ -66,11 +68,30 @@ class ProjectController extends Controller
     $project->fill($data)
     $project->save(); */
 
+    if (isset($data["thumb_link"])) {
+      // I get the binary code of the linked image
+      $imgLink = file_get_contents($data["thumb_link"]);
+
+      // I create a name for the image via a unique path
+      $path = "projects/" . uniqid();
+
+      // I create the file using the binary code as its content
+      File::put(storage_path("app/public/" . $path), $imgLink);
+
+      // I save path in db
+      $data["thumb"] = $path;
+
+    } else if (isset($data["thumb"])){
+      // I save the file in filesystem
+      $data["thumb"] = Storage::put("projects", $data["thumb"]);
+    }
+
     $project = Project::create($data);
 
     // return the show route with the id as the new project's id
     return redirect()->route("admin.projects.show", $project->id);
   }
+
 
   public function edit($slug){
     $project = Project::where("slug", $slug)->firstOrFail();
@@ -78,25 +99,46 @@ class ProjectController extends Controller
     return view("admin.projects.edit", compact("project"));
   }
 
+
   public function update(ProjectUpsertRequest $request, $slug){
     $data = $request->validated();
-
+    
     $project = Project::where("slug", $slug)->firstOrFail();
-
-    if($data["title"] !== $project->title){
+    
+    if ($data["title"] !== $project->title){
       $data["slug"] = $this->generateSlug($data, $data["title"]);
     }
 
-    // I save the file in filesystem
-    $image_path = Storage::put("projects", $data["thumb"]);
-    
-    $data["image"] = $image_path;
-    dd($data["image"]);
+    // If I set the image as a link, opposed of loading the image via the input type file I set the image as
+    // a string in thumb_link instead of simple thumb
+    if (isset($data["thumb_link"])) {
+      // I get the binary code of the linked image
+      $imgLink = file_get_contents($data["thumb_link"]);
+
+      // I create a name for the image via a unique path
+      $path = "projects/" . uniqid();
+
+      // I create the file using the binary code as its content
+      File::put(storage_path("app/public/" . $path), $imgLink);
+
+      // I save path in db
+      $data["thumb"] = $path;
+
+    } else if (isset($data["thumb"])){
+      // If an image already exists I delete it
+      if ($project->thumb){
+        Storage::delete($project->thumb);
+      }
+
+      // I save the file in filesystem
+      $data["thumb"] = Storage::put("projects", $data["thumb"]);
+    }
 
     $project->update($data);
 
     return redirect()->route("admin.projects.show", $project->slug);
   }
+
 
   public function destroy($slug){
     $project = Project::where("slug", $slug)->firstOrFail();

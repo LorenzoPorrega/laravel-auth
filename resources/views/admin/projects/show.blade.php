@@ -2,15 +2,21 @@
 @section('content')
   <div class="content">
     <div class="container p-5 mb-4">
-      <div class="row">
-        <div class="col">
-          <a class="text-decoration-none">
-            <div class="card bg-transparent border-0 rounded-0 h-100 position-relative">
-              <div class="deleted-comic-card">
-                <img src="{{ $project->thumb }}" class="card-img-top border-0 rounded-0" alt="" title="">
-                <div class="card-body posionated-delete text-white position-absolute d-flex flex-wrap justify-content-center align-items-end h-100">
-                  <p class="card-text text-uppercase fw-bold fs-5 text-center"></p>
-                </div>
+      <div class="row d-flex justify-content-center">
+        <div class="col-6">
+          <a class="text-decoration-none text-black">
+            <div class="card bg-transparent overflow-hidden h-100 position-relative">
+              <div class="card-content-box">
+                <img src="{{ asset('storage/' . $project->thumb) }}" class="card-img-top border-0 rounded-0" alt="" title="">
+                <div class="card-body">
+                  <h5 class="card-title fw-bold fs-2">{{ $project->title }}</h5>
+                  <p class="fw-bold mt-2 mb-0">Description:</p>
+                  <p class="card-text">{{ $project->description }}</p>
+                  <p class="card-text mb-0"><span class="fw-bold">Release date:</span> {{ $project->release }}</p>
+                  <p class="card-text"><span class="fw-bold">Language:</span> {{ $project->language }}</p>
+                  <p class="card-text"><span class="fw-bold">Repository link:</span> <a href="{{ $project->link }}">{{ $project->link }}</a></p>
+
+                </div>              
               </div>
             </div>
           </a>

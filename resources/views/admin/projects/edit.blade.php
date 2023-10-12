@@ -37,7 +37,7 @@
       </div>
       <div class="mb-4">
         <label class="fw-bold" for="description">{{__('Description')}}</label>
-        <textarea class="form-control" type="text" name="description">{{ $project->description }}"</textarea>
+        <textarea class="form-control" type="text" name="description">{{ $project->description }}</textarea>
         {{-- @error('description')
         <span class="invalid-feedback" role="alert">
             <strong>{{ $errors->get('description')}}</strong>
@@ -45,8 +45,16 @@
         @enderror --}}
       </div>
       <div class="mb-4">
-        <label class="fw-bold" for="thumb">{{__('Thumb image')}}</label>
-        <input class="form-control" type="file" name="thumb">
+        <label class="fw-bold" for="old-thumb">Current thumb image</label>
+        <img src="{{ asset('storage/' . $project->thumb) }}" alt="" class="img-thumbnail d-block my-2" style="width:250px;" name="old-thumb">
+
+        <div class="input-group">
+          <label class="btn btn-outline-secondary" type="button" id="inputGroupFileAddon04">
+            <input type="file" class="form-control d-none" name="thumb" accept="img/*">
+            Scegli un immagine locale
+          </label>
+          <input type="text" class="form-control" name="thumb_link" placeholder="...oppure fornisci un link web ad un immagine">
+        </div>
         {{-- @error('thumb')
         <span class="invalid-feedback" role="alert">
             <strong>{{ $errors->get('thumb')}}</strong>
@@ -57,11 +65,18 @@
         <div class="row">
           <div class="col-6">
             <label class="fw-bold" for="language">{{__("Select the project's language")}}</label>
-            <select class="form-select" name="language">
+            <select class="form-select" multiple name="language" >
               <option selected disabled hidden>Select a language</option>
-              <option value="it">Italian</option>
-              <option value="en">English</option>
-              <option value="fr">French</option>
+              <option value="HTML">HTML</option>
+              <option value="CSS">CSS</option>
+              <option value="Bootstrap">Bootstrap</option>
+              <option value="JavaScript">JavaScript</option>
+              <option value="VueJS">VueJS</option>
+              <option value="Vite">Vite</option>
+              <option value="SCSS">SCSS</option>
+              <option value="PHP">PHP</option>
+              <option value="MySQL">MySQL</option>
+              <option value="Laravel">Laravel</option>
             </select>
             {{-- @error('language')
             <span class="invalid-feedback" role="alert">

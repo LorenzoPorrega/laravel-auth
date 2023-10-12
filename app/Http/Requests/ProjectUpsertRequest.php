@@ -34,8 +34,9 @@ class ProjectUpsertRequest extends FormRequest
 			"language" => "required|string",
 			"link" => "required|string",
 			"description" => "required|string",
-			"thumb" => "required|file",
-			"release" => "required|date",
+			"thumb" => "nullable|image|max:10240",
+			"thumb_link" => "nullable|max:255",
+			"release" => "required|date"
 		];
 	}
 
@@ -47,12 +48,12 @@ class ProjectUpsertRequest extends FormRequest
 	public function messages(): array
 	{
 		return [
-			'title.required' => 'A title is required',
-			'link.required' => 'A link to the repository is required',
-			'description.required' => 'A description is required',
-			'thumb.required' => 'A thumb link is required',
-			'language.required' => 'The repository language is required',
-			'release.required' => 'The release date is required',
+			'title.required' => 'A title is required.',
+			'link.required' => 'A link to the repository is required.',
+			'description.required' => 'A description is required.',
+			'thumb.required' => 'Maximum thumb image size is 10MB.',
+			'language.required' => 'The repository language is required.',
+			'release.required' => 'The release date is required.',
 		];
 	}
 }
